@@ -604,7 +604,14 @@ supports-color@^7.0.0:
   dependencies:
     has-flag "^4.0.0"
 
-svelte@^3.0.0:
+svelte-awesome@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/svelte-awesome/-/svelte-awesome-2.3.2.tgz#aed33e0b0714565bb0ce925e7c972ea73b70c5a4"
+  integrity sha512-odkwkVSYEARI/4CskjwoI7KIhds1Ui74H1VFAifWuDoczY+JpPeJuBwDqgo8imM7Bd76U+ns7Yf1iQqveHnx5Q==
+  dependencies:
+    svelte "^3.15.0"
+
+svelte@^3.0.0, svelte@^3.15.0:
   version "3.38.2"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.38.2.tgz#55e5c681f793ae349b5cc2fe58e5782af4275ef5"
   integrity sha512-q5Dq0/QHh4BLJyEVWGe7Cej5NWs040LWjMbicBGZ+3qpFWJ1YObRmUDZKbbovddLC9WW7THTj3kYbTOFmU9fbg==
