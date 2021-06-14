@@ -1,63 +1,40 @@
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+/*
+	Reset CSS
+	v1.1
+	Last updated : 2021.05.24
+	Author : Yunju Oh
+ */
+* {
+    box-sizing:border-box;
 }
-
-body {
-	color: #333;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+html, body, div, span, iframe,
+h1, h2, h3, h4, h5, h6, p, pre,
+a, address, img, ins, strong, b,
+input, select, textarea,
+dl, dt, dd, ol, ul, li,
+form, label, table, thead, tbody, tr, th, td,
+header, footer, section, article, aside,
+nav, menu, hgroup, figure, figcaption {
+    margin:0;
+    padding:0;
 }
-
-a {
-	color: rgb(0,100,200);
-	text-decoration: none;
+html, body, #root {
+    width:100%;
+    height:100%;
+    font-size:14px;
+    line-height:1.5em;
+    font-family:'맑은 고딕', Sans-serif, serif;
 }
-
-a:hover {
-	text-decoration: underline;
+header, footer, section, article, aside,
+nav, menu, hgroup, figure, figcaption {
+    display:block;
 }
-
-a:visited {
-	color: rgb(0,80,160);
+img	{
+    border:0;
 }
-
-label {
-	display: block;
+ul, ol {
+    list-style:none;
 }
-
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-}
-
-input:disabled {
-	color: #ccc;
-}
-
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
-}
-
-button:disabled {
-	color: #999;
-}
-
-button:not(:disabled):active {
-	background-color: #ddd;
-}
-
-button:focus {
-	border-color: #666;
+input, select, textarea, button	{
+    outline:none;
 }
