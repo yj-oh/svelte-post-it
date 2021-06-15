@@ -1,52 +1,30 @@
 <script>
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { plus } from 'svelte-awesome/icons';
-	import { getUuid } from './utils';
-
-	const LIST_ITEM_NAME = 'boardList';
-	const ACTIVE_BOARD_ITEM_NAME = 'activeBoard';
-
-	let activeBoard = restoreActiveBoard();
-
-	$: list = restoreList();
-	$: if(activeBoard) persistActiveBoard();
-
-	function persistList() {
-		localStorage.setItem(LIST_ITEM_NAME, JSON.stringify(list));
-	}
-
-	function persistActiveBoard() {
-		localStorage.setItem(ACTIVE_BOARD_ITEM_NAME, JSON.stringify(activeBoard));
-	}
-
-	function restoreList() {
-		const storageList = localStorage.getItem(LIST_ITEM_NAME);
-		return storageList && storageList.length > 0 ? JSON.parse(storageList) : [];
-	}
-
-	function restoreActiveBoard() {
-		const storageActiveBoard = localStorage.getItem(ACTIVE_BOARD_ITEM_NAME);
-		return storageActiveBoard ? JSON.parse(storageActiveBoard) : null;
-	}
+	import { boardList, activeBoard } from './store/stores';
+	import { getInitBoard } from './utils';
 
 	function addBoard() {
-		activeBoard = { id: getUuid(), name: '새 보드' };
-		list.push(activeBoard);
-		persistList();
+		const initBoard = getInitBoard();
+
+		boardList.set([...$boardList, initBoard]);
+		activeBoard.set(initBoard);
 	}
 
 	function changeActiveBoard(e) {
 		const id = e.target.dataset.id;
-		activeBoard = list.find(board => board.id === id);
+		const newActiveBoard = $boardList.find(board => board.id === id);
+
+		activeBoard.set(newActiveBoard);
 	}
 </script>
 
 <section>
 	<h3>📒 Online Post-it</h3>
 	<ul class='nav-board'>
-		{#each list as board (board.id)}
+		{#each $boardList as board (board.id)}
 			<li
-				class={board.id === activeBoard?.id ? 'active' : ''}
+				class={board.id === $activeBoard.id ? 'active' : ''}
 				data-id={board.id}
 				on:click={changeActiveBoard}
 			>
