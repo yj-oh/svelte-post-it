@@ -33,7 +33,7 @@
 	}
 </script>
 
-<section on:dblclick={addPostIt}>
+<section id='board' on:dblclick={addPostIt}>
 	<header>
 		{#if isEdit}
 			<input

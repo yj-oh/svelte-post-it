@@ -99,13 +99,59 @@
 			return list;
 		});
 	}
+
+	function onMousedown(e) {
+		const target = e.currentTarget.parentNode;
+		const boardListWidth = document.querySelector('section#board').getBoundingClientRect().left;
+
+		let x;
+		let y;
+		let shiftX = e.clientX - target.getBoundingClientRect().left + boardListWidth;
+		let shiftY = e.clientY - target.getBoundingClientRect().top;
+
+		function moveAt(pageX, pageY) {
+			x = pageX - shiftX;
+			y = pageY - shiftY;
+			target.style.left = x + 'px';
+			target.style.top = y + 'px';
+		}
+
+		moveAt(e.pageX, e.pageY);
+
+		function onMouseMove(e) {
+			moveAt(e.pageX, e.pageY);
+		}
+
+		document.addEventListener('mousemove', onMouseMove);
+
+		target.onmouseup = function() {
+			document.removeEventListener('mousemove', onMouseMove);
+			target.onmouseup = null;
+
+			updatePosition(x, y);
+		};
+	}
+
+	function updatePosition(x, y) {
+		postItList.update(list => {
+			list.map(postIt => {
+				if (postIt.id === id) {
+					postIt.position = { x, y };
+				}
+			});
+			return list;
+		});
+	}
 </script>
 
 <article
 	style='--x:{`${x}px`}; --y:{`${y}px`}; --width:{`${width}px`}; --height:{`${height}px`}; --resize:{isOpen ? "both" : "none"};'
 	on:mouseup={updateSize}
 >
-	<header>
+	<header
+		on:mousedown={onMousedown}
+		on:dragstart={() => { return false; }}
+	>
 		<div class='title-area'>
 			{#if isEditTitle}
 				<input
