@@ -7,8 +7,6 @@
 		.filter(postIt => postIt.boardId === $activeBoard.id);
 
 	let isEdit = false;
-	let editTitlePostItId = null;
-	let editContentPostItId = null;
 
 	function toggleEdit() {
 		isEdit = !isEdit;
@@ -41,38 +39,6 @@
 			return list.filter(postIt => postIt.id !== id);
 		});
 	}
-
-	function toggleOpen(e) {
-		const id = e.detail;
-
-		postItList.update(list => {
-			list.map(postIt => {
-				if (postIt.id === id) {
-					postIt.isOpen = !postIt.isOpen;
-				}
-			});
-			return list;
-		});
-	}
-
-	function toggleEditTitle(e) {
-		editTitlePostItId = e.detail;
-	}
-
-	function updatePostItTitle(e) {
-		const id = e.detail.id;
-		const title = e.detail.title;
-
-		postItList.update(list => {
-			list.map(postIt => {
-				if (postIt.id === id) {
-					postIt.title = title;
-				}
-			});
-			return list;
-		});
-		editTitlePostItId = null;
-	}
 </script>
 
 <section on:dblclick={addPostIt}>
@@ -97,12 +63,7 @@
 		{#each filteredPostItList as postIt (postIt.id)}
 			<PostIt
 				{...postIt}
-				isEditTitle={postIt.id === editTitlePostItId}
-				isEditContent={postIt.id === editContentPostItId}
 				on:delete={deletePostIt}
-				on:toggleOpen={toggleOpen}
-				on:toggleEditTitle={toggleEditTitle}
-				on:updateTitle={updatePostItTitle}
 			/>
 		{/each}
 	</div>

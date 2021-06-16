@@ -3,6 +3,7 @@
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
 	import { handleInputBlur } from './utils';
+	import { postItList } from './store/stores';
 
 	const dispatch = createEventDispatcher();
 
@@ -15,13 +16,40 @@
 	export let isOpen;
 	export let zIndex;
 
-	export let isEditTitle;
-	export let isEditContent;
-
 	let width = `${size.width}px`;
 	let height = `${size.height}px`;
 	let x = `${position.x}px`;
 	let y = `${position.y}px`;
+
+	let isEditTitle = false;
+	let isEditContent = false;
+
+	function toggleEditTitle() {
+		isEditTitle = !isEditTitle;
+	}
+
+	function updateIsOpen() {
+		postItList.update(list => {
+			list.map(postIt => {
+				if (postIt.id === id) {
+					postIt.isOpen = !postIt.isOpen;
+				}
+			});
+			return list;
+		});
+	}
+
+	function updateTitle() {
+		postItList.update(list => {
+			list.map(postIt => {
+				if (postIt.id === id) {
+					postIt.title = title;
+				}
+			});
+			return list;
+		});
+		toggleEditTitle();
+	}
 </script>
 
 <article style='--x:{x}; --y:{y}; --width:{width}; --height:{height};'>
@@ -34,17 +62,17 @@
 					autofocus
 					maxlength='50'
 					bind:value={title}
-					on:blur={() => dispatch('updateTitle', { id, title })}
+					on:blur={updateTitle}
 					on:keydown={handleInputBlur}
 				/>
 			{:else}
-				<div class='title' on:click={() => dispatch('toggleEditTitle', id)}>
+				<div class='title' on:click={toggleEditTitle}>
 					<span>{title}</span>
 				</div>
 			{/if}
 		</div>
 		<div class='icon-area'>
-			<span on:click={() => dispatch('toggleOpen', id)}>
+			<span on:click={updateIsOpen}>
 				<Icon data={isOpen ? chevronUp : chevronDown} />
 			</span>
 			<span on:click={() => dispatch('delete', id)}>
