@@ -1,7 +1,7 @@
 <script>
 	import { boardList, activeBoard, postItList } from './store/stores';
 	import PostIt from './PostIt.svelte';
-	import { getInitPostIt } from './utils';
+	import { getInitPostIt, handleInputBlur } from './utils';
 
 	$: filteredPostItList = $postItList
 		.filter(postIt => postIt.boardId === $activeBoard.id);
@@ -12,12 +12,6 @@
 
 	function toggleEdit() {
 		isEdit = !isEdit;
-	}
-
-	function handleInputBlur(e) {
-		if (e.key === 'Enter') {
-			e.target.blur();
-		}
 	}
 
 	function updateBoardName() {

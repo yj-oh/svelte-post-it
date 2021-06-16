@@ -20,3 +20,9 @@ export function getInitPostIt(boardId, x = 20, y = 20) {
 		zIndex: 1,
 	};
 }
+
+export function handleInputBlur(e) {
+	if (e.key === 'Enter') {
+		e.target.blur();
+	}
+}
