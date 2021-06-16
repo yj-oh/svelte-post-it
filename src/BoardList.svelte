@@ -55,7 +55,10 @@
         line-height: 1.5rem;
         cursor: pointer;
     }
-    li:hover, li.active {
+    li:hover {
+        background-color: #c5c5c5;
+    }
+    li.active {
         background-color: #212121;
         color: #ffffff;
     }
