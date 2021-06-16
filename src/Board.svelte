@@ -3,6 +3,9 @@
 	import PostIt from './PostIt.svelte';
 	import { getInitPostIt } from './utils';
 
+	$: filteredPostItList = $postItList
+		.filter(postIt => postIt.boardId === $activeBoard.id);
+
 	let isEdit = false;
 	let editTitlePostItId = null;
 	let editContentPostItId = null;
@@ -78,7 +81,7 @@
 		{/if}
 	</header>
 	<div class='post-it-area'>
-		{#each $postItList as postIt (postIt.id)}
+		{#each filteredPostItList as postIt (postIt.id)}
 			<PostIt
 				{...postIt}
 				isEditTitle={postIt.id === editTitlePostItId}
