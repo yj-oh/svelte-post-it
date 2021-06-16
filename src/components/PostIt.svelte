@@ -123,6 +123,11 @@
 		}
 
 		document.addEventListener('mousemove', onMouseMove);
+		document.addEventListener('mouseleave', function() {
+			document.removeEventListener('mousemove', onMouseMove);
+			target.style.left = position.x + 'px';
+			target.style.top = position.y + 'px';
+		});
 
 		target.onmouseup = function() {
 			document.removeEventListener('mousemove', onMouseMove);
