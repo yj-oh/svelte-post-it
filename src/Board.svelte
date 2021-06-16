@@ -44,6 +44,19 @@
 			return list.filter(postIt => postIt.id !== id);
 		});
 	}
+
+	function toggleOpen(e) {
+		const id = e.detail;
+
+		postItList.update(list => {
+			list.map(postIt => {
+				if (postIt.id === id) {
+					postIt.isOpen = !postIt.isOpen;
+				}
+			});
+			return list;
+		});
+	}
 </script>
 
 <section on:dblclick={addPostIt}>
@@ -71,6 +84,7 @@
 				isEditTitle={postIt.id === editTitlePostItId}
 				isEditContent={postIt.id === editContentPostItId}
 				on:delete={deletePostIt}
+				on:toggle={toggleOpen}
 			/>
 		{/each}
 	</div>

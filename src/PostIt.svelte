@@ -41,7 +41,7 @@
 			{/if}
 		</div>
 		<div class='icon-area'>
-			<span>
+			<span on:click={() => dispatch('toggle', id)}>
 				<Icon data={isOpen ? chevronUp : chevronDown} />
 			</span>
 			<span on:click={() => dispatch('delete', id)}>
@@ -49,21 +49,23 @@
 			</span>
 		</div>
 	</header>
-	<div class='content-area'>
-		{#if isEditContent}
-			<input
-				class='content'
-				required
-				autofocus
-				maxlength='50'
-				bind:value={content}
-			/>
-		{:else}
-			<div class='content'>
-				<span>{content}</span>
-			</div>
-		{/if}
-	</div>
+	{#if isOpen}
+		<div class='content-area'>
+			{#if isEditContent}
+				<input
+					class='content'
+					required
+					autofocus
+					maxlength='50'
+					bind:value={content}
+				/>
+			{:else}
+				<div class='content'>
+					<span>{content}</span>
+				</div>
+			{/if}
+		</div>
+	{/if}
 </article>
 
 <style>
@@ -73,7 +75,6 @@
 	    top: var(--y);
         width: var(--width);
         height: var(--height);
-        background-color: #f8d300;
     }
     header {
         display: flex;
@@ -102,5 +103,10 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+    .content-area {
+	    width: 100%;
+	    height: calc(100% - 2rem);
+        background-color: #f8d300;
     }
 </style>
