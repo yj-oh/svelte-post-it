@@ -5,20 +5,17 @@
 
 	const dispatch = createEventDispatcher();
 
-	export let postIt;
+	export let id;
+	export let boardId;
+	export let title;
+	export let content;
+	export let position;
+	export let size;
+	export let isOpen;
+	export let zIndex;
+
 	export let isEditTitle;
 	export let isEditContent;
-
-	let {
-		id,
-		boardId,
-		title,
-		content,
-		position,
-		size,
-		isOpen,
-		zIndex,
-	} = postIt;
 
 	let width = `${size.width}px`;
 	let height = `${size.height}px`;

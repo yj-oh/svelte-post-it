@@ -67,7 +67,7 @@
 	<div class='post-it-area'>
 		{#each $postItList as postIt (postIt.id)}
 			<PostIt
-				{postIt}
+				{...postIt}
 				isEditTitle={postIt.id === editTitlePostItId}
 				isEditContent={postIt.id === editContentPostItId}
 				on:delete={deletePostIt}
