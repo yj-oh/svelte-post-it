@@ -5,3 +5,4 @@ const initBoard = getInitBoard();
 
 export const boardList = writableStorage('boardList', [initBoard]);
 export const activeBoard = writableStorage('activeBoard', initBoard);
+export const postItList = writableStorage('postItList', []);
