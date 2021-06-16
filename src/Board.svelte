@@ -28,9 +28,17 @@
 		});
 		toggleEdit();
 	}
+
+	function addPostIt(e) {
+		const { pageX: x, pageY: y } = e;
+		const clientRect = e.target.getBoundingClientRect();
+		const initPostIt = getInitPostIt($activeBoard.id, x - clientRect.left, y);
+
+		postItList.set([...$postItList, initPostIt]);
+	}
 </script>
 
-<section>
+<section on:dblclick={addPostIt}>
 	<header>
 		{#if isEdit}
 			<input
@@ -61,6 +69,7 @@
 
 <style>
 	section {
+		position: relative;
 		width: calc(100% - 200px);
 	}
 	.board-name {
@@ -82,8 +91,5 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-    }
-    div.post-it-area {
-	    position: relative;
     }
 </style>
