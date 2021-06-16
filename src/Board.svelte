@@ -71,6 +71,13 @@
 	section {
 		position: relative;
 		width: calc(100% - 200px);
+        background-image: linear-gradient(
+                rgba(210, 210, 210, 0.5) 0.7px,
+                transparent 0.5px
+        ),
+        linear-gradient(to right, rgba(210, 210, 210, 0.5) 0.7px, #ffffff 0.5px);
+        background-size: 10px 10px;
+		overflow: auto;
 	}
 	.board-name {
 		padding: 2rem 0 1.5rem 1.5rem;
