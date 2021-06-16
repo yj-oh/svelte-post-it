@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
 	import { handleInputBlur } from '../utils';
@@ -13,13 +14,26 @@
 	export let isOpen;
 	export let zIndex;
 
-	let width = `${size.width}px`;
-	let height = `${size.height}px`;
-	let x = `${position.x}px`;
-	let y = `${position.y}px`;
-
 	let isEditTitle = false;
 	let isEditContent = false;
+
+	let { width, height } = size;
+	let { x, y } = position;
+
+	let newWidth = width;
+	let newHeight = height;
+	let resizeObserver = new ResizeObserver(entries => {
+		for (let entry of entries) {
+			const rect = entry.contentRect;
+			newWidth = rect.width;
+			newHeight = rect.height;
+		}
+	});
+	onMount(() => {
+		document.querySelectorAll('article').forEach(article => {
+			resizeObserver.observe(article);
+		});
+	});
 
 	function toggleEditTitle() {
 		isEditTitle = !isEditTitle;
@@ -71,9 +85,26 @@
 			return list.filter(postIt => postIt.id !== id);
 		});
 	}
+
+	function updateSize() {
+		if(width === newWidth && height === newHeight) {
+			return;
+		}
+		postItList.update(list => {
+			list.map(postIt => {
+				if (postIt.id === id) {
+					postIt.size = { width: newWidth, height: newHeight };
+				}
+			});
+			return list;
+		});
+	}
 </script>
 
-<article style='--x:{x}; --y:{y}; --width:{width}; --height:{height};'>
+<article
+	style='--x:{`${x}px`}; --y:{`${y}px`}; --width:{`${width}px`}; --height:{`${height}px`}; --resize:{isOpen ? "both" : "none"};'
+	on:mouseup={updateSize}
+>
 	<header>
 		<div class='title-area'>
 			{#if isEditTitle}
@@ -127,6 +158,10 @@
 	    top: var(--y);
         width: var(--width);
         height: var(--height);
+        min-width: 130px;
+        min-height: 100px;
+        resize: var(--resize);
+        overflow: auto;
     }
     header {
         display: flex;
