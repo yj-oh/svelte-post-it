@@ -1,6 +1,6 @@
 <script>
-	import BoardList from './BoardList.svelte';
-	import Board from "./Board.svelte";
+	import BoardList from './components/BoardList.svelte';
+	import Board from "./components/Board.svelte";
 </script>
 
 <main>

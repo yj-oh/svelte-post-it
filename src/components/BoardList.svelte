@@ -1,8 +1,8 @@
 <script>
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { plus } from 'svelte-awesome/icons';
-	import { boardList, activeBoard } from './store/stores';
-	import { getInitBoard } from './utils';
+	import { boardList, activeBoard } from '../store/stores';
+	import { getInitBoard } from '../utils';
 
 	function addBoard() {
 		const initBoard = getInitBoard();

@@ -1,7 +1,7 @@
 <script>
-	import { boardList, activeBoard, postItList } from './store/stores';
+	import { boardList, activeBoard, postItList } from '../store/stores';
 	import PostIt from './PostIt.svelte';
-	import { getInitPostIt, handleInputBlur } from './utils';
+	import { getInitPostIt, handleInputBlur } from '../utils';
 
 	$: filteredPostItList = $postItList
 		.filter(postIt => postIt.boardId === $activeBoard.id);

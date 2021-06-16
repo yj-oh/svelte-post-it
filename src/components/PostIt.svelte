@@ -2,8 +2,8 @@
 	import { createEventDispatcher } from 'svelte';
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
-	import { handleInputBlur } from './utils';
-	import { postItList } from './store/stores';
+	import { handleInputBlur } from '../utils';
+	import { postItList } from '../store/stores';
 
 	const dispatch = createEventDispatcher();
 
