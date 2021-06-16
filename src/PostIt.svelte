@@ -27,6 +27,9 @@
 	function toggleEditTitle() {
 		isEditTitle = !isEditTitle;
 	}
+	function toggleEditContent() {
+		isEditContent = !isEditContent;
+	}
 
 	function updateIsOpen() {
 		postItList.update(list => {
@@ -49,6 +52,18 @@
 			return list;
 		});
 		toggleEditTitle();
+	}
+
+	function updateContent(e) {
+		postItList.update(list => {
+			list.map(postIt => {
+				if (postIt.id === id) {
+					postIt.content = e.target.value;
+				}
+			});
+			return list;
+		});
+		toggleEditContent();
 	}
 </script>
 
@@ -87,9 +102,11 @@
 					class='content'
 					required
 					autofocus
+					on:blur={updateContent}
+					on:keydown={handleInputBlur}
 				>{content}</textarea>
 			{:else}
-				<div class='content'>
+				<div class='content' on:click={toggleEditContent}>
 					<span>{content}</span>
 				</div>
 			{/if}
