@@ -1,6 +1,9 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
+
+	const dispatch = createEventDispatcher();
 
 	export let postIt;
 	export let isEditTitle;
@@ -44,7 +47,7 @@
 			<span>
 				<Icon data={isOpen ? chevronUp : chevronDown} />
 			</span>
-			<span>
+			<span on:click={() => dispatch('delete', id)}>
 				<Icon data={times} />
 			</span>
 		</div>

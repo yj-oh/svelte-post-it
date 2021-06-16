@@ -36,6 +36,14 @@
 
 		postItList.set([...$postItList, initPostIt]);
 	}
+
+	function deletePostIt(e) {
+		const id = e.detail;
+
+		postItList.update(list => {
+			return list.filter(postIt => postIt.id !== id);
+		});
+	}
 </script>
 
 <section on:dblclick={addPostIt}>
@@ -62,6 +70,7 @@
 				{postIt}
 				isEditTitle={postIt.id === editTitlePostItId}
 				isEditContent={postIt.id === editContentPostItId}
+				on:delete={deletePostIt}
 			/>
 		{/each}
 	</div>
