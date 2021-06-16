@@ -1,11 +1,8 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
 	import { handleInputBlur } from '../utils';
 	import { postItList } from '../store/stores';
-
-	const dispatch = createEventDispatcher();
 
 	export let id;
 	export let boardId;
@@ -65,6 +62,15 @@
 		});
 		toggleEditContent();
 	}
+
+	function deletePostIt() {
+		if(content && !window.confirm('정말 삭제하시겠습니까?')) {
+			return;
+		}
+		postItList.update(list => {
+			return list.filter(postIt => postIt.id !== id);
+		});
+	}
 </script>
 
 <article style='--x:{x}; --y:{y}; --width:{width}; --height:{height};'>
@@ -90,7 +96,7 @@
 			<span on:click={updateIsOpen}>
 				<Icon data={isOpen ? chevronUp : chevronDown} />
 			</span>
-			<span on:click={() => dispatch('delete', id)}>
+			<span on:click={deletePostIt}>
 				<Icon data={times} />
 			</span>
 		</div>
