@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
+	import { handleInputBlur } from './utils';
 
 	const dispatch = createEventDispatcher();
 
@@ -33,9 +34,11 @@
 					autofocus
 					maxlength='50'
 					bind:value={title}
+					on:blur={() => dispatch('updateTitle', { id, title })}
+					on:keydown={handleInputBlur}
 				/>
 			{:else}
-				<div class='title'>
+				<div class='title' on:click={() => dispatch('toggleEditTitle', id)}>
 					<span>{title}</span>
 				</div>
 			{/if}
@@ -102,6 +105,10 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+    input.title {
+	    padding: 1px 2px;
+	    border: none;
     }
     .content-area {
 	    width: 100%;

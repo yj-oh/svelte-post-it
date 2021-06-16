@@ -54,6 +54,25 @@
 			return list;
 		});
 	}
+
+	function toggleEditTitle(e) {
+		editTitlePostItId = e.detail;
+	}
+
+	function updatePostItTitle(e) {
+		const id = e.detail.id;
+		const title = e.detail.title;
+
+		postItList.update(list => {
+			list.map(postIt => {
+				if (postIt.id === id) {
+					postIt.title = title;
+				}
+			});
+			return list;
+		});
+		editTitlePostItId = null;
+	}
 </script>
 
 <section on:dblclick={addPostIt}>
@@ -82,6 +101,8 @@
 				isEditContent={postIt.id === editContentPostItId}
 				on:delete={deletePostIt}
 				on:toggle={toggleOpen}
+				on:toggleEditTitle={toggleEditTitle}
+				on:updateTitle={updatePostItTitle}
 			/>
 		{/each}
 	</div>
