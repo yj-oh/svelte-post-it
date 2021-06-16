@@ -1,7 +1,11 @@
 <script>
-	import { boardList, activeBoard } from './store/stores';
+	import { boardList, activeBoard, postItList } from './store/stores';
+	import PostIt from './PostIt.svelte';
+	import { getInitPostIt } from './utils';
 
 	let isEdit = false;
+	let editTitlePostItId = null;
+	let editContentPostItId = null;
 
 	function toggleEdit() {
 		isEdit = !isEdit;
@@ -44,6 +48,15 @@
 			</div>
 		{/if}
 	</header>
+	<div class='post-it-area'>
+		{#each $postItList as postIt (postIt.id)}
+			<PostIt
+				{postIt}
+				isEditTitle={postIt.id === editTitlePostItId}
+				isEditContent={postIt.id === editContentPostItId}
+			/>
+		{/each}
+	</div>
 </section>
 
 <style>
@@ -69,5 +82,8 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+    div.post-it-area {
+	    position: relative;
     }
 </style>
