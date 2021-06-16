@@ -52,13 +52,11 @@
 	{#if isOpen}
 		<div class='content-area'>
 			{#if isEditContent}
-				<input
+				<textarea
 					class='content'
 					required
 					autofocus
-					maxlength='50'
-					bind:value={content}
-				/>
+				>{content}</textarea>
 			{:else}
 				<div class='content'>
 					<span>{content}</span>
@@ -93,8 +91,9 @@
         width: 2.5rem;
         cursor: pointer;
     }
-    .title {
+    .title, .content {
 	    width: 100%;
+	    height: 100%;
     }
     div.title, div.content {
         cursor: pointer;
@@ -108,5 +107,11 @@
 	    width: 100%;
 	    height: calc(100% - 2rem);
         background-color: #f8d300;
+    }
+    .content {
+        padding: 5px 10px;
+    }
+    textarea.content {
+        resize: none;
     }
 </style>
