@@ -44,7 +44,7 @@
 			{/if}
 		</div>
 		<div class='icon-area'>
-			<span on:click={() => dispatch('toggle', id)}>
+			<span on:click={() => dispatch('toggleOpen', id)}>
 				<Icon data={isOpen ? chevronUp : chevronDown} />
 			</span>
 			<span on:click={() => dispatch('delete', id)}>

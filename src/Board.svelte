@@ -100,7 +100,7 @@
 				isEditTitle={postIt.id === editTitlePostItId}
 				isEditContent={postIt.id === editContentPostItId}
 				on:delete={deletePostIt}
-				on:toggle={toggleOpen}
+				on:toggleOpen={toggleOpen}
 				on:toggleEditTitle={toggleEditTitle}
 				on:updateTitle={updatePostItTitle}
 			/>
