@@ -1,6 +1,6 @@
 /*
 	Reset CSS
-	v1.1
+	v1.1 : Custom
 	Last updated : 2021.05.24
 	Author : Yunju Oh
  */
@@ -33,7 +33,7 @@ img	{
     border:0;
 }
 ul, ol {
-    list-style:none;
+    list-style:inside;
 }
 input, select, textarea, button	{
     outline:none;
@@ -42,4 +42,20 @@ input, select, textarea, button	{
 /* custom */
 .pre {
     white-space: pre;
+}
+
+/** markdown custom styles */
+/* code block */
+pre {
+    padding: 0.5rem;
+    background-color: #242424FF;
+    color: #ffffff;
+}
+/* inline code */
+:not(pre) > code {
+    padding: 1px 3px;
+    border: solid 1px;
+    border-radius: 4px;
+    color: #ea2f2f;
+    font-weight: bold;
 }

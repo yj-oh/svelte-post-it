@@ -3,6 +3,9 @@
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
 	import { handleInputBlur } from '../utils';
 	import { postItList } from '../store/stores';
+	import marked from 'marked';
+	import hljs from 'highlight.js';
+	import 'highlight.js/styles/base16/material-darker.css';
 
 	export let id;
 	export let boardId;
@@ -18,6 +21,13 @@
 
 	$: newWidth = size.width;
 	$: newHeight = size.height;
+
+	marked.setOptions({
+		highlight: function(code, lang) {
+			const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+			return hljs.highlight(code, { language }).value;
+		},
+	});
 
 	let resizeObserver = new ResizeObserver(entries => {
 		for (let entry of entries) {
@@ -189,8 +199,8 @@
 					on:blur={updateContent}
 				>{content}</textarea>
 			{:else}
-				<div class='content pre' on:click={toggleEditContent}>
-					<span>{content}</span>
+				<div class='content' on:click={toggleEditContent}>
+					<div>{@html marked(content)}</div>
 				</div>
 			{/if}
 		</div>
@@ -248,6 +258,7 @@
 		width: 100%;
 		height: calc(100% - #{$headerHeight});
 		background-color: #f8d300;
+		overflow: auto;
 
 		.content {
 			padding: 5px 10px;

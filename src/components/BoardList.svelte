@@ -97,6 +97,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         cursor: pointer;
+	    list-style: none;
     }
     li:hover {
         background-color: #d0d0d0;
