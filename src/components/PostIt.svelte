@@ -20,6 +20,9 @@
 	let { width, height } = size;
 	let { x, y } = position;
 
+	$: style = `--x:${x}px; --y:${y}px; --width:${width}px; --height:${height}px;`
+		+ `--resize:${isOpen ? 'both' : 'none'}`;
+
 	let newWidth = width;
 	let newHeight = height;
 	let resizeObserver = new ResizeObserver(entries => {
@@ -150,8 +153,9 @@
 </script>
 
 <article
-	style='--x:{`${x}px`}; --y:{`${y}px`}; --width:{`${width}px`}; --height:{`${height}px`}; --resize:{isOpen ? "both" : "none"};'
+	style={style}
 	on:mouseup={updateSize}
+	class={isOpen ? 'shadow' : ''}
 >
 	<header
 		on:mousedown={onMousedown}
@@ -213,6 +217,11 @@
         min-height: 100px;
         resize: var(--resize);
         overflow: auto;
+	    color: #3e3a00;
+    }
+    article.shadow {
+        box-shadow: 1px 1px 1px 0 rgba(115, 99, 0, 0.2);
+        -webkit-box-shadow: 1px 1px 1px 0 rgba(115, 99, 0, 0.2);
     }
     header {
         display: flex;
@@ -230,6 +239,10 @@
         justify-content: space-between;
         width: 2.5rem;
         cursor: pointer;
+        color:#736203;
+    }
+    :global(.icon-area svg:hover) {
+	    color: #262300;
     }
     .title, .content {
 	    width: 100%;
