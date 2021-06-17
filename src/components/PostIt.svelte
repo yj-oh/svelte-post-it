@@ -266,6 +266,7 @@
     }
     .content {
         padding: 5px 10px;
+        white-space: pre;
     }
     textarea.content {
         resize: none;
