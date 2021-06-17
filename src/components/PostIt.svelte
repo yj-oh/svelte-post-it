@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
 	import { handleInputBlur } from '../utils';
@@ -17,14 +16,9 @@
 	let isEditTitle = false;
 	let isEditContent = false;
 
-	let { width, height } = size;
-	let { x, y } = position;
+	$: newWidth = size.width;
+	$: newHeight = size.height;
 
-	$: style = `--x:${x}px; --y:${y}px; --width:${width}px; --height:${height}px;`
-		+ `--resize:${isOpen ? 'both' : 'none'}`;
-
-	let newWidth = width;
-	let newHeight = height;
 	let resizeObserver = new ResizeObserver(entries => {
 		for (let entry of entries) {
 			const rect = entry.contentRect;
@@ -32,11 +26,13 @@
 			newHeight = rect.height;
 		}
 	});
-	onMount(() => {
-		document.querySelectorAll('article').forEach(article => {
-			resizeObserver.observe(article);
-		});
-	});
+	function handleObserver(e) {
+		resizeObserver.observe(e.currentTarget);
+	}
+
+	$: style = `--x:${position.x}px; --y:${position.y}px;`
+		+ `--width:${size.width}px; --height:${size.height}px;`
+		+ `--resize:${isOpen ? 'both' : 'none'}`;
 
 	function toggleEditTitle() {
 		isEditTitle = !isEditTitle;
@@ -89,8 +85,8 @@
 		});
 	}
 
-	function updateSize() {
-		if(width === newWidth && height === newHeight) {
+	function updateSize(e) {
+		if(size.width === newWidth && size.height === newHeight) {
 			return;
 		}
 		postItList.update(list => {
@@ -101,6 +97,7 @@
 			});
 			return list;
 		});
+		resizeObserver.unobserve(e.currentTarget);
 	}
 
 	function onMousedown(e) {
@@ -154,6 +151,7 @@
 
 <article
 	style={style}
+	on:mousedown={handleObserver}
 	on:mouseup={updateSize}
 	class={isOpen ? 'shadow' : ''}
 >
