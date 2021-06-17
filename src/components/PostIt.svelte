@@ -102,42 +102,36 @@
 
 	function onMousedown(e) {
 		const target = e.currentTarget.parentNode;
-		const boardListWidth = document.querySelector('section#board').getBoundingClientRect().left;
+
+		const boardListWidth = document.querySelector('#board').getBoundingClientRect().left;
+		const shiftX = e.clientX - target.getBoundingClientRect().left + boardListWidth;
+		const shiftY = e.clientY - target.getBoundingClientRect().top;
 
 		let x;
 		let y;
-		let shiftX = e.clientX - target.getBoundingClientRect().left + boardListWidth;
-		let shiftY = e.clientY - target.getBoundingClientRect().top;
 
-		function moveAt(pageX, pageY) {
-			x = pageX - shiftX;
-			y = pageY - shiftY;
+		document.onmousemove = function(e) {
+			x = e.pageX - shiftX;
+			y = e.pageY - shiftY;
+
+			if(x < 0) x = 0;
+			if(y < 0) y = 0;
+
 			target.style.left = x + 'px';
 			target.style.top = y + 'px';
 		}
 
-		moveAt(e.pageX, e.pageY);
-
-		function onMouseMove(e) {
-			moveAt(e.pageX, e.pageY);
-		}
-
-		document.addEventListener('mousemove', onMouseMove);
-		document.addEventListener('mouseleave', function() {
-			document.removeEventListener('mousemove', onMouseMove);
-			target.style.left = position.x + 'px';
-			target.style.top = position.y + 'px';
-		});
-
-		target.onmouseup = function() {
-			document.removeEventListener('mousemove', onMouseMove);
-			target.onmouseup = null;
+		document.onmouseup = function() {
+			document.onmouseup = null;
+			document.onmousemove = null;
 
 			updatePosition(x, y);
 		};
 	}
 
 	function updatePosition(x, y) {
+		if(x === undefined || y === undefined) return;
+
 		postItList.update(list => {
 			list.map(postIt => {
 				if (postIt.id === id) {
