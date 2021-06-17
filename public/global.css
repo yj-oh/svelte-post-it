@@ -38,3 +38,8 @@ ul, ol {
 input, select, textarea, button	{
     outline:none;
 }
+
+/* custom */
+.pre {
+    white-space: pre;
+}
