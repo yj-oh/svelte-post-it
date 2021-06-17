@@ -45,7 +45,10 @@
 </script>
 
 <section>
-	<h3>📒 Online Post-it</h3>
+	<header>
+		<img src='./logo.png' alt='logo'/>
+		<h3>Online Post-it</h3>
+	</header>
 	<ul>
 		{#each $boardList as board (board.id)}
 			<li
@@ -74,9 +77,17 @@
         background-color:#e2e2e2;
         overflow-y: auto;
     }
-    h3 {
-        padding: 1rem;
+    header {
+	    display: flex;
+	    align-items: center;
+	    padding: 0.5rem;
         border-bottom: 1px solid rgb(210, 210, 210);
+    }
+    header img {
+	    width: 32px;
+    }
+    header h3 {
+	    padding: 0 0.5rem;
     }
     li {
 	    position: relative;
