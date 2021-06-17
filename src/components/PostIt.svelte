@@ -238,6 +238,8 @@
     .title, .content {
 	    width: 100%;
 	    height: 100%;
+        background-color: inherit;
+        border: none;
     }
     div.title, div.content {
         cursor: pointer;
@@ -248,7 +250,6 @@
     }
     input.title {
 	    padding: 1px 2px;
-	    border: none;
     }
     .content-area {
 	    width: 100%;
