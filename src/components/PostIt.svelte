@@ -197,69 +197,76 @@
 	{/if}
 </article>
 
-<style>
+<style lang='scss'>
+	@import 'public/common';
+
+	$headerHeight: 2rem;
+
     article {
 	    position: absolute;
 	    left: var(--x);
 	    top: var(--y);
         width: var(--width);
         height: var(--height);
-        min-width: 130px;
-        min-height: 100px;
+		min-width: 130px;
+		min-height: 100px;
         resize: var(--resize);
         overflow: auto;
 	    color: #3e3a00;
-    }
-    article.shadow {
-        box-shadow: 1px 1px 1px 0 rgba(115, 99, 0, 0.2);
-        -webkit-box-shadow: 1px 1px 1px 0 rgba(115, 99, 0, 0.2);
+
+        &.shadow {
+            box-shadow: 1px 1px 1px 0 rgba(115, 99, 0, 0.2);
+            -webkit-box-shadow: 1px 1px 1px 0 rgba(115, 99, 0, 0.2);
+        }
     }
     header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 0.5rem;
-        height: 2rem;
+        height: $headerHeight;
         background-color: #e2c000;
     }
-    .title-area {
+	header .title-area {
         width: 80%;
+
+		input {
+			padding: 1px 2px;
+		}
+		span {
+			@include ellipsis;
+			display: block;
+		}
     }
-    .icon-area {
+	header .icon-area {
         display: flex;
         justify-content: space-between;
         width: 2.5rem;
-        cursor: pointer;
-        color:#736203;
+        color: #736203;
     }
-    :global(.icon-area svg:hover) {
-	    color: #262300;
-    }
-    .title, .content {
+	.content-area {
+		width: 100%;
+		height: calc(100% - #{$headerHeight});
+		background-color: #f8d300;
+
+		.content {
+			padding: 5px 10px;
+		}
+		textarea.content {
+			resize: none;
+		}
+	}
+
+    .title, 
+    .content {
 	    width: 100%;
 	    height: 100%;
         background-color: inherit;
         border: none;
     }
-    div.title, div.content {
+    div.title,
+    div.content,
+    .icon-area {
         cursor: pointer;
-    }
-    div.title > span {
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-    input.title {
-	    padding: 1px 2px;
-    }
-    .content-area {
-	    width: 100%;
-	    height: calc(100% - 2rem);
-        background-color: #f8d300;
-    }
-    .content {
-        padding: 5px 10px;
-    }
-    textarea.content {
-        resize: none;
     }
 </style>
