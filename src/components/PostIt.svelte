@@ -31,8 +31,8 @@
 	}
 
 	$: style = `--x:${position.x}px; --y:${position.y}px;`
-		+ `--width:${size.width}px; --height:${size.height}px;`
-		+ `--resize:${isOpen ? 'both' : 'none'}`;
+		+ `--width:${size.width}px; --height:${isOpen ? `${size.height}px` : 0};`
+		+ `--resize:${isOpen ? 'both' : 'none'};`;
 
 	function toggleEditTitle() {
 		isEditTitle = !isEditTitle;
@@ -86,7 +86,7 @@
 	}
 
 	function updateSize(e) {
-		if(size.width === newWidth && size.height === newHeight) {
+		if(!isOpen || (size.width === newWidth && size.height === newHeight)) {
 			return;
 		}
 		postItList.update(list => {
@@ -209,7 +209,7 @@
         width: var(--width);
         height: var(--height);
 		min-width: 130px;
-		min-height: 100px;
+		min-height: $headerHeight;
         resize: var(--resize);
         overflow: auto;
 	    color: #3e3a00;
