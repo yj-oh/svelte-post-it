@@ -1,7 +1,7 @@
 <script>
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { plus, trash } from 'svelte-awesome/icons';
-	import { boardList, activeBoard } from '../store/stores';
+	import { boardList, activeBoard, postItList } from '../store/stores';
 	import { getInitBoard } from '../utils';
 
 	function addBoard() {
@@ -17,6 +17,31 @@
 
 		activeBoard.set(newActiveBoard);
 	}
+
+	function deleteBoard(e) {
+		e.stopPropagation();
+
+		if(!window.confirm('정말 삭제하시겠습니까?')) {
+			return;
+		}
+
+		const id = e.currentTarget.parentNode.dataset.id;
+
+		boardList.update(list => {
+			return list.filter(board => board.id !== id);
+		});
+		postItList.update(list => {
+			return list.filter(postIt => postIt.boardId !== id);
+		});
+
+		if($activeBoard.id === id) {
+			if($boardList[0]) {
+				activeBoard.set($boardList[0]);
+			} else {
+				addBoard();
+			}
+		}
+	}
 </script>
 
 <section>
@@ -29,7 +54,12 @@
 				on:click={changeActiveBoard}
 			>
 				<span class='board-name'>{board.name}</span>
-				<span class='delete-btn'><Icon data={trash} /></span>
+				<span
+					class='delete-btn'
+					on:click={deleteBoard}
+				>
+					<Icon data={trash} />
+				</span>
 			</li>
 		{/each}
 		<li class='add-btn' on:click={addBoard}>
