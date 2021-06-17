@@ -173,7 +173,7 @@
 					on:keydown={handleInputBlur}
 				/>
 			{:else}
-				<div class='title' on:click={toggleEditTitle}>
+				<div class='title pre' on:click={toggleEditTitle}>
 					<span>{title}</span>
 				</div>
 			{/if}
@@ -197,7 +197,7 @@
 					on:blur={updateContent}
 				>{content}</textarea>
 			{:else}
-				<div class='content' on:click={toggleEditContent}>
+				<div class='content pre' on:click={toggleEditContent}>
 					<span>{content}</span>
 				</div>
 			{/if}
@@ -251,7 +251,6 @@
         cursor: pointer;
     }
     div.title > span {
-        white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
     }
@@ -266,7 +265,6 @@
     }
     .content {
         padding: 5px 10px;
-        white-space: pre;
     }
     textarea.content {
         resize: none;

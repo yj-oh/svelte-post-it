@@ -46,7 +46,7 @@
 				on:keydown={handleInputBlur}
 			/>
 		{:else}
-			<div class='board-name' on:click={toggleEdit}>
+			<div class='board-name pre' on:click={toggleEdit}>
 				<span>{$activeBoard.name}</span>
 			</div>
 		{/if}
@@ -88,7 +88,6 @@
 		cursor: pointer;
 	}
     div.board-name span {
-        white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
     }

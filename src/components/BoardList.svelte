@@ -56,7 +56,7 @@
 				data-id={board.id}
 				on:click={changeActiveBoard}
 			>
-				<span class='board-name'>{board.name}</span>
+				<span class='board-name pre'>{board.name}</span>
 				<span
 					class='delete-btn'
 					on:click={deleteBoard}
@@ -94,7 +94,6 @@
         padding: 0.5rem 1rem 0.5rem 1.2rem;
 	    height: 2.5rem;
         line-height: 1.5rem;
-        white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
         cursor: pointer;
@@ -107,7 +106,6 @@
 	    background-color: #212121;
     }
     .board-name {
-        white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
     }
