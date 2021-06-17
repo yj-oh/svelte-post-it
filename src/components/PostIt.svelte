@@ -195,7 +195,6 @@
 					required
 					autofocus
 					on:blur={updateContent}
-					on:keydown={handleInputBlur}
 				>{content}</textarea>
 			{:else}
 				<div class='content' on:click={toggleEditContent}>
