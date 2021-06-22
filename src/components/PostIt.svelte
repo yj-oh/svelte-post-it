@@ -22,6 +22,10 @@
 	$: newWidth = size.width;
 	$: newHeight = size.height;
 
+	$: style = `--x:${position.x}px; --y:${position.y}px;`
+		+ `--width:${size.width}px; --height:${isOpen ? `${size.height}px` : 0};`
+		+ `--resize:${isOpen ? 'both' : 'none'};`;
+
 	marked.setOptions({
 		highlight: function(code, lang) {
 			const language = hljs.getLanguage(lang) ? lang : 'plaintext';
@@ -39,10 +43,6 @@
 	function handleObserver(e) {
 		resizeObserver.observe(e.currentTarget);
 	}
-
-	$: style = `--x:${position.x}px; --y:${position.y}px;`
-		+ `--width:${size.width}px; --height:${isOpen ? `${size.height}px` : 0};`
-		+ `--resize:${isOpen ? 'both' : 'none'};`;
 
 	function toggleEditTitle() {
 		isEditTitle = !isEditTitle;
