@@ -86,15 +86,6 @@
 		toggleEditContent();
 	}
 
-	function onDelete() {
-		if(content && !window.confirm('정말 삭제하시겠습니까?')) {
-			return;
-		}
-		postItList.update(list => {
-			return list.filter(postIt => postIt.id !== id);
-		});
-	}
-
 	function updateSize(e) {
 		if(!isOpen || (size.width === newWidth && size.height === newHeight)) {
 			return;
@@ -149,6 +140,15 @@
 				}
 			});
 			return list;
+		});
+	}
+
+	function onDelete() {
+		if(content && !window.confirm('정말 삭제하시겠습니까?')) {
+			return;
+		}
+		postItList.update(list => {
+			return list.filter(postIt => postIt.id !== id);
 		});
 	}
 </script>
