@@ -86,7 +86,7 @@
 		toggleEditContent();
 	}
 
-	function deletePostIt() {
+	function onDelete() {
 		if(content && !window.confirm('정말 삭제하시겠습니까?')) {
 			return;
 		}
@@ -184,7 +184,7 @@
 			<span on:click={updateIsOpen}>
 				<Icon data={isOpen ? chevronUp : chevronDown} />
 			</span>
-			<span on:click={deletePostIt}>
+			<span on:click={onDelete}>
 				<Icon data={times} />
 			</span>
 		</div>
