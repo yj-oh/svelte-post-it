@@ -21,3 +21,6 @@ yarn-error.log*
 
 ### MacOS ###
 .DS_Store
+
+### Environment variables File ###
+.env
