@@ -14,3 +14,14 @@ yarn install
 
 yarn start
 ```
+
+## ⚙️ Firebase configuration
+- root/.env
+```
+APP_API_KEY=
+APP_AUTH_DOMAIN=
+APP_PROJECT_ID=
+APP_STORAGE_BUCKET=
+APP_MESSAGING_SENDER_ID=
+APP_APP_ID=
+```
