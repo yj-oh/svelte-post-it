@@ -1,11 +1,20 @@
 import { v4 as uuidV4 } from 'uuid';
+import { now } from 'svelte/internal';
 
 export function getUuid() {
 	return uuidV4();
 }
 
-export function getInitBoard() {
-	return { id: getUuid(), name: '새 보드' };
+export function getInitBoard(userId = Math.random()) {
+	console.log(userId);
+	return {
+		id: getUuid(),
+		name: '새 보드',
+		postIt: [],
+		userId: userId,
+		createdAt: now(),
+		activation: true,
+	};
 }
 
 export function getInitPostIt(boardId, x = 20, y = 20) {
