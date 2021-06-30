@@ -5,6 +5,10 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import sveltePreprocess from 'svelte-preprocess';
+import dotenv from 'dotenv';
+import replace from '@rollup/plugin-replace';
+
+dotenv.config();
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -48,6 +52,15 @@ export default {
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: 'bundle.css' }),
+
+		replace({
+			APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
+			APP_AUTH_DOMAIN: JSON.stringify(process.env.APP_AUTH_DOMAIN),
+			APP_PROJECT_ID: JSON.stringify(process.env.APP_PROJECT_ID),
+			APP_STORAGE_BUCKET: JSON.stringify(process.env.APP_STORAGE_BUCKET),
+			APP_MESSAGING_SENDER_ID: JSON.stringify(process.env.APP_MESSAGING_SENDER_ID),
+			APP_APP_ID: JSON.stringify(process.env.APP_APP_ID),
+		}),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
