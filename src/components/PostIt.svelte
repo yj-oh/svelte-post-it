@@ -265,6 +265,8 @@
 			padding: 5px 10px;
 		}
 		textarea.content {
+			font-size: 14px;
+			line-height: 1.5rem;
 			resize: none;
 		}
 	}
