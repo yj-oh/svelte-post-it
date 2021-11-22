@@ -1,7 +1,7 @@
 <script>
 	import { boardList, activeBoard, postItList } from '../store/stores';
 	import PostIt from './PostIt.svelte';
-	import { getInitPostIt, handleInputBlur } from '../utils';
+	import { selectOnFocus, getInitPostIt, handleInputBlur } from '../utils';
 
 	$: filteredPostItList = $postItList
 		.filter(postIt => postIt.boardId === $activeBoard.id);
@@ -44,6 +44,7 @@
 				bind:value={$activeBoard.name}
 				on:blur={updateBoardName}
 				on:keydown={handleInputBlur}
+				use:selectOnFocus
 			/>
 		{:else}
 			<div class='board-name pre' on:click={toggleEdit}>
