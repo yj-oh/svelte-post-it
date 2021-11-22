@@ -1,7 +1,7 @@
 <script>
 	import Icon from 'svelte-awesome/components/Icon.svelte';
 	import { times, chevronUp, chevronDown } from 'svelte-awesome/icons';
-	import { handleInputBlur } from '../utils';
+	import { selectOnFocus, handleInputBlur } from '../utils';
 	import { postItList } from '../store/stores';
 	import marked from 'marked';
 	import hljs from 'highlight.js';
@@ -173,6 +173,7 @@
 					bind:value={title}
 					on:blur={updateTitle}
 					on:keydown={handleInputBlur}
+					use:selectOnFocus
 				/>
 			{:else}
 				<div class='title pre' on:click={toggleEditTitle}>
