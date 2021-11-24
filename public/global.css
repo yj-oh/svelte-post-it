@@ -33,7 +33,7 @@ img	{
     border:0;
 }
 ul, ol {
-    list-style:inside;
+    list-style-position:inside;
 }
 input, select, textarea, button	{
     outline:none;
