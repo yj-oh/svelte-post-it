@@ -151,6 +151,11 @@
 			return list.filter(postIt => postIt.id !== id);
 		});
 	}
+
+	function convertMarkdownToHtml(markdown) {
+		const html = marked(markdown);
+		return html.replaceAll(/(?<!\<(.*)\>)\n/gm, '<br/>');
+	}
 </script>
 
 <article
@@ -201,7 +206,7 @@
 				>{content}</textarea>
 			{:else}
 				<div class='content' on:click={toggleEditContent}>
-					<div>{@html marked(content)}</div>
+					<div>{@html convertMarkdownToHtml(content)}</div>
 				</div>
 			{/if}
 		</div>
